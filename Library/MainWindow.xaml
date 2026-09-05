@@ -1,0 +1,141 @@
+﻿<Window x:Class="Library.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library"
+        mc:Ignorable="d"
+        Title="📚 Библиотека — Управление" Height="650" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F0EB">
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Margin="0,0,0,10" Background="White" BorderBrush="#D1C4B0" BorderThickness="0,0,0,1">
+            <MenuItem Header="_Файл">
+                <MenuItem Header="_Выход" InputGestureText="Alt+F4" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Справка">
+                <MenuItem Header="_О программе" Click="About_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <ToolBar Grid.Row="1" Margin="0,0,0,10" Background="#2C3E50">
+            <Button Content="➕ Добавить" Click="Add_Click" Background="#3E5A6D" Foreground="White" BorderThickness="0" Padding="8,4"/>
+            <Button Content="✏️ Редактировать" Click="Edit_Click" Background="#3E5A6D" Foreground="White" BorderThickness="0" Padding="8,4"/>
+            <Button Content="🗑️ Удалить" Click="Delete_Click" Background="#3E5A6D" Foreground="White" BorderThickness="0" Padding="8,4"/>
+            <Button Content="🔄 Обновить" Click="Refresh_Click" Background="#3E5A6D" Foreground="White" BorderThickness="0" Padding="8,4"/>
+            <Separator/>
+            <Button Content="📊 Отчёты" Click="Reports_Click" Background="#3E5A6D" Foreground="White" BorderThickness="0" Padding="8,4"/>
+        </ToolBar>
+
+        <Border Grid.Row="2" Background="White" CornerRadius="8" Padding="10" Margin="0,0,0,10" BorderBrush="#D1C4B0" BorderThickness="1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="🔍 Поиск:" VerticalAlignment="Center" Margin="0,0,10,0" FontWeight="SemiBold" Foreground="#2C3E50"/>
+                <TextBox x:Name="SearchBox" Width="220" TextChanged="SearchBox_TextChanged" Background="#F9F6F2" BorderBrush="#B0A89A" BorderThickness="1" Padding="6"/>
+
+                <TextBlock Text="Фильтр:" VerticalAlignment="Center" Margin="15,0,10,0" FontWeight="SemiBold" Foreground="#2C3E50"/>
+                <ComboBox x:Name="FilterCombo" Width="160" SelectionChanged="FilterCombo_SelectionChanged" Background="#F9F6F2" BorderBrush="#B0A89A" BorderThickness="1" Padding="6"/>
+
+                <Button Content="Сбросить" Margin="15,0,0,0" Click="ClearSearch_Click" Background="#E74C3C" Foreground="White" BorderThickness="0" Padding="12,6" FontWeight="SemiBold" Cursor="Hand"/>
+            </StackPanel>
+        </Border>
+
+        <TabControl Grid.Row="3" Margin="0,0,0,10" Name="MainTabControl" SelectionChanged="TabControl_SelectionChanged"
+                    Background="White" BorderBrush="#D1C4B0" BorderThickness="1">
+            <TabItem Header="📚 Книги" Name="TabBooks" Background="#F5F0EB">
+                <DataGrid x:Name="BooksGrid" 
+                          AutoGenerateColumns="False" 
+                          IsReadOnly="False"
+                          SelectionMode="Single" 
+                          SelectionUnit="FullRow"
+                          CanUserAddRows="False" 
+                          CanUserDeleteRows="False"
+                          Margin="5"
+                          Background="White"
+                          RowBackground="White"
+                          AlternatingRowBackground="#F9F6F2">
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="✏️ Редактировать" Click="Edit_Click"/>
+                            <MenuItem Header="🗑️ Удалить" Click="Delete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                        <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="200"/>
+                        <DataGridTextColumn Header="Автор" Binding="{Binding Author.FullName}" Width="150"/>
+                        <DataGridTextColumn Header="Жанр" Binding="{Binding Genre.Name}" Width="100"/>
+                        <DataGridTextColumn Header="Год" Binding="{Binding Year}" Width="60"/>
+                        <DataGridCheckBoxColumn Header="Доступна" Binding="{Binding IsAvailable}" Width="80"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem Header="👤 Читатели" Name="TabReaders" Background="#F5F0EB">
+                <DataGrid x:Name="ReadersGrid" AutoGenerateColumns="False" IsReadOnly="False"
+                          SelectionMode="Single" SelectionUnit="FullRow"
+                          CanUserAddRows="False" CanUserDeleteRows="False"
+                          Margin="5"
+                          Background="White"
+                          RowBackground="White"
+                          AlternatingRowBackground="#F9F6F2">
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="✏️ Редактировать" Click="Edit_Click"/>
+                            <MenuItem Header="🗑️ Удалить" Click="Delete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                        <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="100"/>
+                        <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="100"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150"/>
+                        <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="120"/>
+                        <DataGridTextColumn Header="Адрес" Binding="{Binding Address}" Width="150"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem Header="📖 Выдачи" Name="TabLoans" Background="#F5F0EB">
+                <DataGrid x:Name="LoansGrid" AutoGenerateColumns="False" IsReadOnly="False"
+                          SelectionMode="Single" SelectionUnit="FullRow"
+                          CanUserAddRows="False" CanUserDeleteRows="False"
+                          Margin="5"
+                          Background="White"
+                          RowBackground="White"
+                          AlternatingRowBackground="#F9F6F2">
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="✏️ Редактировать" Click="Edit_Click"/>
+                            <MenuItem Header="🗑️ Удалить" Click="Delete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                        <DataGridTextColumn Header="Книга" Binding="{Binding Book.Title}" Width="150"/>
+                        <DataGridTextColumn Header="Читатель" Binding="{Binding Reader.FullName}" Width="120"/>
+                        <DataGridTextColumn Header="Дата выдачи" Binding="{Binding LoanDate, StringFormat={}{0:dd.MM.yyyy}}" Width="100"/>
+                        <DataGridTextColumn Header="Дата возврата" Binding="{Binding ReturnDate, StringFormat={}{0:dd.MM.yyyy}}" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+
+        <StatusBar Grid.Row="4" Background="#2C3E50" Foreground="White">
+            <StatusBarItem>
+                <TextBlock Name="StatusText" Text="Готов к работе"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock Name="RecordCountText" Text="Записей: 0"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

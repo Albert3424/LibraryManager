@@ -1,0 +1,39 @@
+﻿<Window x:Class="Library.Views.Books.AddAuthorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Добавить автора" Height="290" Width="400"
+        WindowStartupLocation="CenterOwner"
+        Background="#F5F0EB">
+
+    <Border Margin="20" Background="White" CornerRadius="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Имя:" VerticalAlignment="Center" FontWeight="SemiBold" Foreground="#2C3E50"/>
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="FirstNameBox" Margin="5" Background="#F9F6F2" BorderBrush="#B0A89A" BorderThickness="1" Padding="6"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Фамилия:" VerticalAlignment="Center" FontWeight="SemiBold" Foreground="#2C3E50"/>
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="LastNameBox" Margin="5" Background="#F9F6F2" BorderBrush="#B0A89A" BorderThickness="1" Padding="6"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Страна:" VerticalAlignment="Center" FontWeight="SemiBold" Foreground="#2C3E50"/>
+            <TextBox Grid.Row="2" Grid.Column="1" x:Name="CountryBox" Margin="5" Background="#F9F6F2" BorderBrush="#B0A89A" BorderThickness="1" Padding="6"/>
+
+            <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                <Button Content="Сохранить" Width="100" Margin="5" Click="Save_Click" Background="#3E5A6D" Foreground="White" BorderThickness="0" Padding="10,6" FontWeight="SemiBold" Cursor="Hand"/>
+                <Button Content="Отмена" Width="100" Margin="5" Click="Cancel_Click" Background="#E74C3C" Foreground="White" BorderThickness="0" Padding="10,6" FontWeight="SemiBold" Cursor="Hand"/>
+            </StackPanel>
+
+            <TextBlock Grid.Row="4" Grid.ColumnSpan="2" x:Name="ErrorText" Foreground="#E74C3C" TextWrapping="Wrap" Margin="5"/>
+        </Grid>
+    </Border>
+</Window>
