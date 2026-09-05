@@ -204,7 +204,6 @@ namespace Library
                     break;
             }
         }
-
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             LoadData();
