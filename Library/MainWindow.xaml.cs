@@ -206,7 +206,11 @@ namespace Library
         }
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
+            _context.Dispose();
+            _context = new LibraryContext();
             LoadData();
+            UpdateFilterItems();
+            ApplyFilter();
         }
 
         private void Reports_Click(object sender, RoutedEventArgs e)
