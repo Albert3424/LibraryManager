@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="📚 Библиотека — Управление" Height="650" Width="1000"
         WindowStartupLocation="CenterScreen"
-        Background="#F5F0EB">
+        Background="#F5F0EB"
+        KeyDown="Window_KeyDown">
 
     <Grid Margin="15">
         <Grid.RowDefinitions>

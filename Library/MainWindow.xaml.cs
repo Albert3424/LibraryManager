@@ -345,5 +345,13 @@ namespace Library
         {
             ApplyFilter();
         }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.N && Keyboard.Modifiers == ModifierKeys.Control)
+                Add_Click(this, null);
+            else if (e.Key == Key.F && Keyboard.Modifiers == ModifierKeys.Control)
+                Refresh_Click(this, null);
+        }
     }
 }
